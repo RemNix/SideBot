@@ -9,6 +9,7 @@ import discord
 import random
 import requests
 import time
+import os
 from discord.ext import commands
 from discord.ext.commands import Bot
 from Var import Hug 
@@ -175,4 +176,4 @@ async def infos(ctx, user: discord.Member):
     await bot.say(embed=embed)
 
 
-bot.run(BOT_TOKEN)
+bot.run(os.environ.get('BOT_TOKEN'))
