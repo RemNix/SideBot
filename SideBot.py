@@ -16,7 +16,7 @@ from Var import Couleurs
 
 bot = commands.Bot(command_prefix='!')
 emojis = bot.get_all_emojis()
-
+bot.remove_command('help')
 
 @bot.event
 async def on_ready():
@@ -25,7 +25,7 @@ async def on_ready():
 
 	
 @bot.command(pass_context=True)
-async def commandes(ctx):
+async def commandes():
 	embed = discord.Embed(title="Commandes de SideBot", color=0x800000)
 	embed.add_field(name="nani", value="NANI????", inline=False)
 	embed.add_field(name="ping", value="dit pong", inline=False)
@@ -33,16 +33,14 @@ async def commandes(ctx):
 	embed.add_field(name="avatar", value="Donne l'avatar d'un utilisateur", inline=False)
 	embed.add_field(name="infos", value="Donne des informations sur un utilisateur", inline=False)
 	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def ping(ctx):
-	await bot.say("pong")
+#@bot.command(pass_context=True)
+#async def help():
+#	await async 
 
 @bot.command(pass_context=True)
-async def neko(ctx):
-	r = requests.get("https://cdn.nekos.life/neko/")
-	await bot.say(r)
-	
+async def ping(ctx):
+	await bot.say("Pong ! 🏓")
+
 
 @bot.command(pass_context=True)
 async def delete(ctx, nombre):
@@ -80,19 +78,13 @@ async def rem():
 	embed.set_image(url="https://i.imgur.com/{}".format(random.choice(Rem)))
 	await bot.say(embed=embed)
 	
+
 @bot.command(pass_context=True)
-async def nsfw(ctx):
-	if ctx.message.channel.is_nsfw():
-		await bot.say("oui")
-	else:
-		await bot.say("non")
-		
-@bot.command(pass_context=True)
-async def say(ctx,message):
-	emoji = discord.utils.get(emojis, id='420974322317000711')
+async def say(ctx,*,message):
+	emoji = discord.utils.get(bot.get_all_emojis(), name='Lul')
 	msg =str(message)
-	await bot.say(msg)
-	bot.add_reaction(msg,emoji)	
+	MessEnv = await bot.say(msg)
+	await bot.add_reaction(MessEnv,emoji)	
 
 @bot.command(pass_context=True)
 async def couleur(ctx, arg1, arg2=None):
@@ -171,3 +163,4 @@ async def infos(ctx, user: discord.Member):
 
 
 bot.run(os.environ.get('BOT_TOKEN'))
+
