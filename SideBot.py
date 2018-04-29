@@ -1,15 +1,10 @@
 #SideBot
-#a faire : !say !couleur reset !clap; !slap; !commandes ;!nani; !nsfw avec yande.re et nekos.life/lewd
-#ajouter le protocol GET avec HTTPs
-#pour écrire une emote : <:megThumbsup:420974322317000711> pour avoir ca il faut faire \:megThumbsup:
-#pour avoir l'id d'un role \@role
-#py -m pip install NomDuModule
-#id du bot 416321324873678858
 import discord
 import random
 import requests
 import time
 import os
+import asyncio
 from discord.ext import commands
 from discord.ext.commands import Bot
 from Var import Hug 
@@ -18,7 +13,6 @@ from Var import Rem
 from Var import Nani
 from Var import Couleurs
 
-import asyncio
 
 bot = commands.Bot(command_prefix='!')
 emojis = bot.get_all_emojis()
