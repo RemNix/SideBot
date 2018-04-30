@@ -7,11 +7,8 @@ import os
 import asyncio
 from discord.ext import commands
 from discord.ext.commands import Bot
-from Var import Hug 
-from Var import Pat
-from Var import Rem 
-from Var import Nani
-from Var import Couleurs
+from Var import Hug , Pat , Rem , Nani , Couleurs
+from ImgEdit import img_txt
 
 
 bot = commands.Bot(command_prefix='!')
@@ -33,9 +30,6 @@ async def commandes():
 	embed.add_field(name="avatar", value="Donne l'avatar d'un utilisateur", inline=False)
 	embed.add_field(name="infos", value="Donne des informations sur un utilisateur", inline=False)
 	await bot.say(embed=embed)
-#@bot.command(pass_context=True)
-#async def help():
-#	await async 
 
 @bot.command(pass_context=True)
 async def ping(ctx):
@@ -82,9 +76,63 @@ async def rem():
 @bot.command(pass_context=True)
 async def say(ctx,*,message):
 	emoji = discord.utils.get(bot.get_all_emojis(), name='Lul')
-	msg =str(message)
-	MessEnv = await bot.say(msg)
+	MessEnv = await bot.say(str(message))
 	await bot.add_reaction(MessEnv,emoji)	
+
+
+
+@bot.command(pass_context=True)
+async def vote(ctx, vote_type:int=None ,Vote_Message=None, nbr:int=None):
+	admin = discord.utils.get(ctx.message.server.roles, id='416319027191873538')
+	modo = discord.utils.get(ctx.message.server.roles, id='420960024437719050')
+	print("vote_type : ",vote_type)
+	print("nbr : ",nbr)
+	print("Vote_Message : ",Vote_Message)
+	if (ctx.message.author.top_role == admin) or (ctx.message.author.top_role == modo) :
+		if(vote_type==1):
+			Vote_Msg_Env = await bot.say(str(Vote_Message))
+			await bot.add_reaction(Vote_Msg_Env, "👍")
+			await bot.add_reaction(Vote_Msg_Env, "👎")
+		elif(vote_type==2):
+			Vote_Msg_Env = await bot.say(str(Vote_Message))
+			if(nbr >= 0) :
+				for i in range (1,nbr):
+					if(i == 1):
+						i_txt = "🇦"
+					if(i == 2):
+						i_txt = ":two:"
+					if(i == 3):
+						i_txt = ":three:"
+					if(i == 4):
+						i_txt = ":four:"
+					if(i == 5):
+						i_txt = ":five:"
+					if(i == 6):
+						i_txt = ":six:"
+					if(i == 7):
+						i_txt = ":seven:"
+					if(i == 8):
+						i_txt = ":eight:"
+					if(i == 9):
+						i_txt = ":nine:"
+					if(i == 10):
+						i_txt = ":keycap_ten:"
+					i_emoji = discord.utils.get(bot.get_all_emojis(), name=i_txt)
+					print("i_txt : ",i_txt)
+					print("i_emoji : ", i_emoji)
+					await bot.add_reaction(Vote_Msg_Env, i_txt)
+					i += 1
+			else:
+				await bot.say("Erreur dans la commande, faites ```!vote``` pour afficher l'aide")
+		else:
+			await bot.say("Aide pour la comande")
+	else :
+		await bot.say("Vous n'avez pas la permission d'utiliser cette commande")
+
+
+
+
+
 
 @bot.command(pass_context=True)
 async def couleur(ctx, arg1, arg2=None):
