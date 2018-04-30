@@ -8,7 +8,7 @@ import asyncio
 from discord.ext import commands
 from discord.ext.commands import Bot
 from Var import Hug , Pat , Rem , Nani , Couleurs
-from ImgEdit import img_txt
+#from ImgEdit import img_txt
 
 
 bot = commands.Bot(command_prefix='!')
